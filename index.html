@@ -1,0 +1,595 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Once Upon a Time | Bella's Fairytale Christening</title>
+    
+    <!-- Google Fonts: Cinzel Decorative, Great Vibes, and Quicksand -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700&family=Great+Vibes&family=Quicksand:wght@400;600;700&display=swap" rel="stylesheet">
+    
+    <!-- html2canvas library for downloading the invitation pass directly to local device -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+
+    <style>
+        :root {
+            --royal-gold: #d4af37;
+            --soft-gold: #f3e5ab;
+            --fairy-pink: #f8c8dc;
+            --deep-rose: #c25975;
+            --enchanted-purple: #4a2e5d;
+            --magic-lavender: #f4eefa;
+            --text-dark: #3a2240;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Quicksand', sans-serif;
+            background: linear-gradient(180deg, #fbeef5 0%, #e8dff5 100%);
+            color: var(--text-dark);
+            text-align: center;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        /* Hero Header Section */
+        .hero {
+            background: linear-gradient(rgba(74, 46, 93, 0.55), rgba(194, 89, 117, 0.65)), 
+                        url('https://images.unsplash.com/photo-1518709268805-4e9042af9f23?auto=format&fit=crop&w=1350&q=80');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            padding: 50px 15px 70px 15px;
+            border-bottom-left-radius: 50% 25px;
+            border-bottom-right-radius: 50% 25px;
+            box-shadow: 0 4px 20px rgba(74, 46, 93, 0.3);
+            border-bottom: 3px solid var(--royal-gold);
+        }
+
+        .subtitle-top {
+            font-family: 'Great Vibes', cursive;
+            font-size: 2.5rem;
+            color: var(--soft-gold);
+            margin-bottom: 5px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.6);
+        }
+
+        h1 {
+            font-family: 'Cinzel Decorative', serif;
+            font-size: 2.8rem;
+            letter-spacing: 2px;
+            margin-bottom: 5px;
+            color: #ffffff;
+            text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.6);
+        }
+
+        .tagline {
+            font-size: 1.1rem;
+            font-weight: 600;
+            background: rgba(194, 89, 117, 0.9);
+            color: #fff;
+            display: inline-block;
+            padding: 8px 22px;
+            border-radius: 25px;
+            margin-top: 10px;
+            border: 1px solid var(--soft-gold);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+        }
+
+        /* Main Content Container */
+        .container {
+            max-width: 800px;
+            margin: -50px auto 40px auto;
+            padding: 0 15px;
+            width: 100%;
+        }
+
+        .card {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 25px;
+            padding: 35px 20px 30px 20px;
+            box-shadow: 0 10px 30px rgba(74, 46, 93, 0.15);
+            border: 3px solid var(--royal-gold);
+            position: relative;
+        }
+
+        /* Celebrant Profile Image Frame */
+        .profile-container {
+            width: 150px;
+            height: 150px;
+            margin: -85px auto 15px auto;
+            position: relative;
+        }
+
+        .celebrant-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 50%;
+            border: 5px solid var(--royal-gold);
+            box-shadow: 0 6px 15px rgba(0,0,0,0.2);
+            background-color: var(--magic-lavender);
+        }
+
+        .crown-icon {
+            font-size: 2.2rem;
+            margin-bottom: 5px;
+            display: block;
+        }
+
+        .card h2 {
+            font-family: 'Cinzel Decorative', serif;
+            color: var(--enchanted-purple);
+            font-size: 1.5rem;
+            margin-bottom: 5px;
+        }
+
+        .event-details {
+            margin: 25px 0;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 15px;
+        }
+
+        .detail-box {
+            flex: 1 1 220px;
+            background: var(--magic-lavender);
+            padding: 18px 12px;
+            border-radius: 15px;
+            border: 1px dashed var(--deep-rose);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            box-shadow: inset 0 0 8px rgba(194, 89, 117, 0.05);
+        }
+
+        .detail-box h3 {
+            color: var(--deep-rose);
+            font-size: 1rem;
+            margin-bottom: 6px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-weight: 700;
+        }
+
+        .detail-box p {
+            color: var(--enchanted-purple);
+            font-weight: 700;
+            font-size: 0.95rem;
+            line-height: 1.4;
+        }
+
+        /* Call to Action Button */
+        .btn-rsvp, .btn-action {
+            display: inline-block;
+            background: linear-gradient(135deg, var(--deep-rose) 0%, var(--enchanted-purple) 100%);
+            color: white;
+            text-decoration: none;
+            font-size: 1.2rem;
+            font-weight: 700;
+            padding: 14px 35px;
+            border: 2px solid var(--royal-gold);
+            border-radius: 50px;
+            box-shadow: 0 4px 15px rgba(194, 89, 117, 0.4);
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+            margin-top: 15px;
+            width: 100%;
+            max-width: 280px;
+        }
+
+        .btn-rsvp:hover, .btn-action:hover {
+            transform: scale(1.04);
+            box-shadow: 0 6px 20px rgba(194, 89, 117, 0.6);
+        }
+
+        /* ================= MODAL STYLES ================= */
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(58, 34, 64, 0.75);
+            backdrop-filter: blur(5px);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+            padding: 15px;
+            overflow-y: auto;
+        }
+
+        .modal-content {
+            background: #ffffff;
+            padding: 30px 20px;
+            border-radius: 20px;
+            max-width: 500px;
+            width: 100%;
+            border: 3px solid var(--royal-gold);
+            box-shadow: 0 10px 35px rgba(0,0,0,0.3);
+            position: relative;
+            text-align: left;
+            animation: popIn 0.3s ease-out forwards;
+        }
+
+        @keyframes popIn {
+            from { transform: scale(0.85); opacity: 0; }
+            to { transform: scale(1); opacity: 1; }
+        }
+
+        .close-btn {
+            position: absolute;
+            top: 15px;
+            right: 20px;
+            font-size: 1.8rem;
+            color: var(--deep-rose);
+            cursor: pointer;
+            border: none;
+            background: none;
+            font-weight: bold;
+        }
+
+        .modal-title {
+            text-align: center;
+            color: var(--enchanted-purple);
+            font-family: 'Cinzel Decorative', serif;
+            font-size: 1.3rem;
+            margin-bottom: 15px;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 6px;
+            font-weight: 700;
+            color: var(--enchanted-purple);
+            font-size: 0.95rem;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #e0d0e0;
+            border-radius: 12px;
+            font-family: 'Quicksand', sans-serif;
+            font-size: 1rem;
+            outline: none;
+            transition: border-color 0.2s;
+            background-color: #faf6fc;
+        }
+
+        .form-control:focus {
+            border-color: var(--deep-rose);
+            background-color: #fff;
+        }
+
+        /* Digital Royal Pass Card View */
+        .invitation-card-wrapper {
+            display: none;
+            text-align: center;
+        }
+
+        .invitation-card {
+            background: linear-gradient(135deg, #4a2e5d 0%, #2c183a 100%);
+            color: white;
+            border: 4px solid var(--royal-gold);
+            border-radius: 18px;
+            padding: 20px;
+            text-align: center;
+            margin-top: 10px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.3);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .invitation-img-preview {
+            width: 100%;
+            max-width: 320px;
+            border-radius: 12px;
+            border: 2px solid var(--royal-gold);
+            margin: 10px auto 15px auto;
+            display: block;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.4);
+        }
+
+        /* Decorative sparkles inside pass card */
+        .invitation-card::before {
+            content: "✨";
+            position: absolute;
+            top: 10px;
+            left: 15px;
+            font-size: 1.2rem;
+            opacity: 0.6;
+        }
+
+        .invitation-card::after {
+            content: "✨";
+            position: absolute;
+            bottom: 10px;
+            right: 15px;
+            font-size: 1.2rem;
+            opacity: 0.6;
+        }
+
+        .invitation-card h2 {
+            font-family: 'Cinzel Decorative', serif;
+            color: var(--soft-gold);
+            font-size: 1.4rem;
+            margin-top: 5px;
+            text-shadow: 1px 1px 4px rgba(0,0,0,0.8);
+        }
+
+        .invitation-card p {
+            margin: 8px 0;
+            font-size: 0.95rem;
+            color: #f3eaf7;
+        }
+
+        .invitation-card p strong {
+            color: var(--fairy-pink);
+        }
+
+        /* Footer */
+        footer {
+            padding: 20px 15px;
+            color: var(--enchanted-purple);
+            font-size: 0.95rem;
+            font-weight: 600;
+        }
+
+        /* Mobile Adjustments */
+        @media (max-width: 600px) {
+            .hero { padding: 40px 10px 60px 10px; }
+            h1 { font-size: 2rem; }
+            .subtitle-top { font-size: 2rem; }
+            .tagline { font-size: 0.9rem; padding: 6px 15px; }
+            .card { padding: 25px 15px; }
+            .profile-container { width: 120px; height: 120px; margin-top: -75px; }
+            .detail-box { flex: 1 1 100%; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header / Banner Section -->
+    <header class="hero">
+        <p class="subtitle-top">Once Upon a Time...</p>
+        <h1>PRINCESS BELLA</h1>
+        <p class="tagline">🏰 Christening 🏰</p>
+    </header>
+
+    <!-- Main Invitation Content -->
+    <div class="container">
+        <div class="card">
+            
+            <!-- Celebrant Photo -->
+            <div class="profile-container">
+                <img src="bella.jpg" alt="Princess Bella" class="celebrant-img">
+            </div>
+
+            <span class="crown-icon">👑</span>
+            
+            <h2>You Are Cordially Invited!</h2>
+            <p style="margin-top: 8px; color: #5a4066; font-size: 0.95rem; font-weight: 600;">
+                Join us in our enchanted kingdom as we celebrate the royal christening of our little princess!
+            </p>
+
+            <div class="event-details">
+                <div class="detail-box">
+                    <h3>📅 Date & Time</h3>
+                    <p>Saturday<br>December 19, 2026</p>
+                </div>
+                <div class="detail-box">
+                    <h3>⛪ Holy Baptism</h3>
+                    <p>Santo Niño Parish Church<br><small style="font-weight: normal; color: #666;">Aning</small></p>
+                </div>
+                <div class="detail-box">
+                    <h3>🏰 Royal Feast</h3>
+                    <p>Rojo's Beach Resort &<br>Floating Restaurant</p>
+                </div>
+            </div>
+
+            <!-- RSVP Trigger Button -->
+            <button class="btn-rsvp" onclick="openRsvpModal()">RSVP TO THE KINGDOM</button>
+            <p style="font-size: 0.85rem; color: #775c82; margin-top: 12px; font-weight: 600;">Kindly confirm your attendance by Nov 30</p>
+            <p style="font-size: 0.85rem; color: #775c82; margin-top: 6px; font-weight: 600;">For More Info Contact: Michelle Guanzon</p>
+        </div>
+    </div>
+
+    <!-- RSVP MODAL POP-UP -->
+    <div class="modal-overlay" id="rsvpModal">
+        <div class="modal-content">
+            <button class="close-btn" onclick="closeRsvpModal()">&times;</button>
+
+            <!-- FORM INPUT STEP -->
+            <form id="rsvpForm" onsubmit="handleFormSubmit(event)">
+                <h3 class="modal-title">Royal RSVP Confirmation</h3>
+
+                <!-- Select Number of Guests -->
+                <div class="form-group">
+                    <label for="guestCount">How many guests are attending?</label>
+                    <select id="guestCount" class="form-control" onchange="generateNameInputs()" required>
+                        <option value="" disabled selected>-- Select Number of Guests --</option>
+                        <option value="1">1 Royal Guest</option>
+                        <option value="2">2 Royal Guests</option>
+                        <option value="3">3 Royal Guests</option>
+                        <option value="4">4 Royal Guests</option>
+                        <option value="5">5 Royal Guests</option>
+                    </select>
+                </div>
+
+                <!-- Container for Guest Names (Dynamic) -->
+                <div id="guestNamesContainer"></div>
+
+                <!-- Contact Phone Number -->
+                <div class="form-group" id="contactGroup" style="display: none;">
+                    <label for="contactNumber">Contact Phone Number:</label>
+                    <input type="tel" id="contactNumber" class="form-control" placeholder="e.g. 09123456789" required>
+                </div>
+
+                <div style="text-align: center;">
+                    <button type="submit" class="btn-action" id="submitBtn" style="display: none;">Send Confirmation</button>
+                </div>
+            </form>
+
+            <!-- DIGITAL INVITATION PASS DISPLAY -->
+            <div class="invitation-card-wrapper" id="invitationCardWrapper">
+                
+                <!-- Card element captured as image upon download -->
+                <div class="invitation-card" id="invitationCard">
+                    <p style="font-size: 1.1rem; color: var(--soft-gold); text-transform: uppercase; letter-spacing: 1px;">👑 Royal Invitation Pass 👑</p>
+                    <h2>PRINCESS BELLA</h2>
+                    <p style="font-size: 0.85rem; font-style: italic; color: var(--fairy-pink);">Holy Baptism</p>
+                    <hr style="border: 0; height: 1px; background: rgba(212, 175, 55, 0.4); margin: 12px 0;">
+                    
+                    <!-- Official Invitation Image Included in Pass -->
+                    <img src="invitation.png" alt="Official Invitation" class="invitation-img-preview">
+
+                    <p><strong>Primary Guest:</strong> <span id="displayPrimaryName"></span></p>
+                    <p><strong>Total Guests Invited:</strong> <span id="displayCount"></span></p>
+                    <p><strong>Date:</strong> December 19, 2026</p>
+                    <p><strong>Church:</strong> Santo Niño Parish Church - Aning</p>
+                    <p><strong>Reception:</strong> Rojo's Beach Resort</p>
+                    
+                    <p style="font-size: 0.75rem; color: var(--soft-gold); margin-top: 15px;">✨ Present this pass upon entering the kingdom ✨</p>
+                </div>
+
+                <br>
+                <!-- Direct Local Download Button -->
+                <button type="button" class="btn-action" onclick="downloadPassImage()" style="background: var(--royal-gold); color: var(--text-dark); border: none; font-size: 1.05rem;">
+                    📥 Download Pass to Device
+                </button>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <p>May all your wishes come true! We await your presence ✨</p>
+    </footer>
+
+    <!-- JavaScript Logic -->
+    <script>
+        // Open/Close Modal Functions
+        function openRsvpModal() {
+            document.getElementById('rsvpModal').style.display = 'flex';
+        }
+
+        function closeRsvpModal() {
+            document.getElementById('rsvpModal').style.display = 'none';
+        }
+
+        // Generate Guest Input Fields Dynamically
+        function generateNameInputs() {
+            const count = parseInt(document.getElementById('guestCount').value);
+            const container = document.getElementById('guestNamesContainer');
+            const contactGroup = document.getElementById('contactGroup');
+            const submitBtn = document.getElementById('submitBtn');
+
+            container.innerHTML = ''; // Clear previous inputs
+
+            for (let i = 1; i <= count; i++) {
+                const div = document.createElement('div');
+                div.className = 'form-group';
+                div.innerHTML = `
+                    <label>Guest #${i} Full Name:</label>
+                    <input type="text" name="guestName${i}" class="form-control guest-name-input" placeholder="Enter Full Name" required>
+                `;
+                container.appendChild(div);
+            }
+
+            contactGroup.style.display = 'block';
+            submitBtn.style.display = 'inline-block';
+        }
+
+        // Submit RSVP to Google Form and render pass
+        function handleFormSubmit(event) {
+            event.preventDefault();
+
+            // Collect input data
+            const nameInputs = document.querySelectorAll('.guest-name-input');
+            let namesList = [];
+            nameInputs.forEach(input => namesList.push(input.value));
+
+            const guestCount = document.getElementById('guestCount').value;
+            const contactNum = document.getElementById('contactNumber').value;
+            const allNamesFormatted = namesList.join(', ');
+
+            // Google Form IDs
+            const FORM_ID = "1FAIpQLSe0HjK3LymI5BPIddS2DU2lphhYqNYDQNaXhwFVxqRzjFagyQ"; 
+            const ENTRY_NAMES = "entry.766649900";   
+            const ENTRY_COUNT = "entry.1732214530";  
+            const ENTRY_PHONE = "entry.486658306";   
+
+            const formUrl = `https://docs.google.com/forms/d/e/${FORM_ID}/formResponse`;
+
+            // Prepare POST payload
+            const formData = new URLSearchParams();
+            formData.append(ENTRY_NAMES, allNamesFormatted);
+            formData.append(ENTRY_COUNT, guestCount);
+            formData.append(ENTRY_PHONE, contactNum);
+
+            // Submit in background
+            fetch(formUrl, {
+                method: "POST",
+                mode: "no-cors",
+                headers: {
+                    "Content-Type": "application/x-www-form-urlencoded"
+                },
+                body: formData.toString()
+            }).then(() => {
+                console.log("RSVP recorded successfully in Google Forms!");
+            }).catch(error => {
+                console.error("Submission error:", error);
+            });
+
+            // Update UI to display the generated Royal Pass
+            document.getElementById('rsvpForm').style.display = 'none';
+
+            document.getElementById('displayPrimaryName').innerText = namesList[0];
+            document.getElementById('displayCount').innerText = guestCount;
+
+            document.getElementById('invitationCardWrapper').style.display = 'block';
+        }
+
+        // Direct Download Image Function (html2canvas)
+        function downloadPassImage() {
+            const cardElement = document.getElementById('invitationCard');
+
+            // Render pass DOM element into canvas image
+            html2canvas(cardElement, {
+                scale: 2, // High resolution output
+                useCORS: true,
+                backgroundColor: null
+            }).then(canvas => {
+                // Convert canvas to image URL
+                const imageURI = canvas.toDataURL("image/png");
+                
+                // Create temporary invisible link element to trigger device file download
+                const downloadLink = document.createElement("a");
+                downloadLink.href = imageURI;
+                downloadLink.download = "Princess_Bella_Christening_Pass.png";
+                
+                document.body.appendChild(downloadLink);
+                downloadLink.click();
+                document.body.removeChild(downloadLink);
+            });
+        }
+    </script>
+</body>
+</html>
