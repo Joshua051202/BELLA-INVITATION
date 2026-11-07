@@ -77,6 +77,40 @@
             border-bottom: 4px solid var(--sand-gold);
             position: relative;
             z-index: 1;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        /* Side Maui Character Graphics */
+        .hero-side-img {
+            position: absolute;
+            bottom: 15px;
+            width: clamp(90px, 15vw, 150px);
+            height: auto;
+            object-fit: contain;
+            filter: drop-shadow(0 5px 12px rgba(0,0,0,0.4));
+            z-index: 3;
+            animation: floatHeroSide 4s ease-in-out infinite alternate;
+        }
+
+        .hero-side-left {
+            left: clamp(10px, 3vw, 40px);
+        }
+
+        .hero-side-right {
+            right: clamp(10px, 3vw, 40px);
+            transform: scaleX(-1); /* mirrors image to face center if needed */
+        }
+
+        @keyframes floatHeroSide {
+            0% { transform: translateY(0px) rotate(0deg); }
+            100% { transform: translateY(-8px) rotate(2deg); }
+        }
+
+        .hero-content {
+            flex: 1;
+            padding: 0 clamp(80px, 16vw, 140px);
         }
 
         .subtitle-top {
@@ -131,6 +165,7 @@
             width: 100%;
             height: 35px;
             fill: #e0f7fa;
+            z-index: 4;
         }
 
         /* Main Content Container */
@@ -464,6 +499,12 @@
                 align-items: flex-start;
                 padding-top: 20px;
             }
+            .hero-side-img {
+                width: 70px;
+            }
+            .hero-content {
+                padding: 0 65px;
+            }
         }
     </style>
 </head>
@@ -476,9 +517,17 @@
 
     <!-- Header / Ocean Banner Section -->
     <header class="hero">
-        <p class="subtitle-top">The Ocean is Calling...</p>
-        <h1>WAYFINDER BELLA</h1>
-        <p class="tagline">🌺 Moana Birthday Adventure 🌺</p>
+        <!-- Left Side Maui Image -->
+        <img src="maui.png" alt="Maui Left" class="hero-side-img hero-side-left" onerror="handleImageError(this, 'side-left')">
+
+        <div class="hero-content">
+            <p class="subtitle-top">The Ocean is Calling...</p>
+            <h1>WAYFINDER BELLA</h1>
+            <p class="tagline">🌺 Moana Birthday Adventure 🌺</p>
+        </div>
+
+        <!-- Right Side Maui Image -->
+        <img src="maui.png" alt="Maui Right" class="hero-side-img hero-side-right" onerror="handleImageError(this, 'side-right')">
 
         <!-- Wave Shape Divider -->
         <svg class="wave-svg" viewBox="0 0 1440 320" preserveAspectRatio="none">
@@ -505,11 +554,11 @@
             <div class="event-details">
                 <div class="detail-box">
                     <h3>📅 Date & Time</h3>
-                    <p>Thursday<br>November 12, 2026<br>4:00 PM</p>
+                    <p>Friday<br>November 12, 2026<br>4:00 PM</p>
                 </div>
                 <div class="detail-box">
                     <h3>🏝️ Island Feast</h3>
-                    <p>Woodside Subdivision,Lawaan Street.<br> Brgy Alijis Bacolod City</p>
+                    <p>Woodside Subdivision, Lawaan Street.<br>Brgy Alijis Bacolod City</p>
                 </div>
             </div>
 
@@ -559,7 +608,7 @@
             <!-- DIGITAL INVITATION PASS DISPLAY -->
             <div class="invitation-card-wrapper" id="invitationCardWrapper">
                 
-                <!-- Card element captured as image upon download -->
+                <!-- Card element -->
                 <div class="invitation-card" id="invitationCard">
                     <p style="font-size: 1rem; color: var(--sand-gold); text-transform: uppercase; letter-spacing: 1px;">🌊 Royal Wayfinder Pass 🌊</p>
                     <h2>WAYFINDER BELLA</h2>
@@ -573,15 +622,15 @@
                     <p><strong>Total Voyagers:</strong> <span id="displayCount"></span></p>
                     <p><strong>Date:</strong> November 12, 2026</p>
                     <p><strong>Time:</strong> 4:00 PM</p>
-                    <p><strong>Island Venue:</strong> Woodside Subdivision,Lawaan Street. Brgy Alijis B.C</p>
+                    <p><strong>Island Venue:</strong> Woodside Subdivision, Lawaan Street. Brgy Alijis B.C</p>
                     
                     <p style="font-size: 0.72rem; color: var(--sand-gold); margin-top: 12px;">✨ Present this pass upon boarding the floating restaurant ✨</p>
                 </div>
 
                 <br>
-                <!-- Direct Local Download Button -->
-                <button type="button" class="btn-action" id="downloadBtn" onclick="downloadPassImage()" style="background: var(--sand-gold); color: var(--text-dark); border: none; font-size: 1rem;">
-                    Screen Shot This Invitation
+                <!-- Direct Local Action Button -->
+                <button type="button" class="btn-action" id="downloadBtn" style="background: var(--sand-gold); color: var(--text-dark); border: none; font-size: 1rem; cursor: default;">
+                    📸 Screenshot This Invitation
                 </button>
             </div>
 
@@ -595,17 +644,21 @@
 
     <!-- JavaScript Logic -->
     <script>
-        // Data URI Vector Fallbacks to guarantee html2canvas export works without CORS image locks
+        // Data URI Vector Fallbacks to guarantee image display works safely even if local files are missing
         const moanaSvgFallback = 'data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="300" height="300" viewBox="0 0 300 300"><rect width="100%" height="100%" fill="%2300a896"/><circle cx="150" cy="150" r="130" fill="%23e0f2f1" stroke="%23e9c46a" stroke-width="8"/><text x="50%" y="45%" dominant-baseline="middle" text-anchor="middle" font-size="65">🌀</text><text x="50%" y="72%" dominant-baseline="middle" text-anchor="middle" font-family="sans-serif" font-weight="bold" font-size="20" fill="%2305668d">WAYFINDER</text></svg>';
         
         const invitationSvgFallback = 'data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="500" height="300" viewBox="0 0 500 300"><rect width="100%" height="100%" fill="%2305668d"/><rect x="15" y="15" width="470" height="270" rx="10" fill="none" stroke="%23e9c46a" stroke-width="4"/><text x="50%" y="40%" dominant-baseline="middle" text-anchor="middle" font-size="45">🌺 🌊 🌺</text><text x="50%" y="68%" dominant-baseline="middle" text-anchor="middle" font-family="sans-serif" font-weight="bold" font-size="22" fill="%23e9c46a">BELLA\'S BASH</text></svg>';
+
+        const mauiSvgFallback = 'data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="200" height="200" viewBox="0 0 200 200"><circle cx="100" cy="100" r="90" fill="%23f4a261" stroke="%23e9c46a" stroke-width="8"/><text x="50%" y="55%" dominant-baseline="middle" text-anchor="middle" font-size="70">🪝</text></svg>';
 
         function handleImageError(imgElement, type) {
             imgElement.onerror = null;
             if (type === 'profile') {
                 imgElement.src = moanaSvgFallback;
-            } else {
+            } else if (type === 'invitation') {
                 imgElement.src = invitationSvgFallback;
+            } else {
+                imgElement.src = mauiSvgFallback;
             }
         }
 
@@ -688,49 +741,6 @@
             document.getElementById('displayCount').innerText = guestCount;
 
             document.getElementById('invitationCardWrapper').style.display = 'block';
-        }
-
-        // Direct Download Image Function (html2canvas with reliable local image fallback)
-        function downloadPassImage() {
-            const cardElement = document.getElementById('invitationCard');
-            const downloadBtn = document.getElementById('downloadBtn');
-            const invImg = document.getElementById('invitationPreviewImg');
-            
-            downloadBtn.innerText = "⏳ Generating Pass...";
-            downloadBtn.disabled = true;
-
-            // Ensure image source is fully converted to data URI before rendering if opened locally
-            if (!invImg.complete || invImg.naturalWidth === 0) {
-                invImg.src = invitationSvgFallback;
-            }
-
-            setTimeout(() => {
-                html2canvas(cardElement, {
-                    scale: 2,
-                    useCORS: true,
-                    allowTaint: true,
-                    backgroundColor: null,
-                    logging: false
-                }).then(canvas => {
-                    const imageURI = canvas.toDataURL("image/png");
-                    
-                    const downloadLink = document.createElement("a");
-                    downloadLink.href = imageURI;
-                    downloadLink.download = "Bella_Moana_Birthday_Pass.png";
-                    
-                    document.body.appendChild(downloadLink);
-                    downloadLink.click();
-                    document.body.removeChild(downloadLink);
-
-                    downloadBtn.innerText = "📥 Download Pass to Device";
-                    downloadBtn.disabled = false;
-                }).catch(err => {
-                    console.error("Canvas capture failed:", err);
-                    alert("Download initiated! If image download is blocked by local file security, screenshot your pass.");
-                    downloadBtn.innerText = "📥 Download Pass to Device";
-                    downloadBtn.disabled = false;
-                });
-            }, 350);
         }
     </script>
 </body>
